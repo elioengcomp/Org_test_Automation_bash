@@ -18,6 +18,9 @@ pipelines:
             - name: S_B_BuildInfo_0001_buildInfo
         execution:
           onExecute:
+            # Add step url to run to use for comparison on next step
+            - add_run_variables buildStepUrl=$step_url
+            # Upload file and publish build info
             - echo "Content-${run_number}" > artifact.txt
             - jfrog rt upload artifact.txt ${targetRepo}/S_B_BuildInfo_0001-artifact-${run_number}.txt
             - jfrog rt build-publish
@@ -30,6 +33,8 @@ pipelines:
             - name: S_B_BuildInfo_0001_buildInfo
         execution:
           onExecute:
+            # Fetch build url from Artifactory
             - buildInfoApiUrl="$res_S_B_BuildInfo_0001_buildInfo_sourceArtifactory_url/api/build/$res_S_B_BuildInfo_0001_buildInfo_buildName/$res_S_B_BuildInfo_0001_buildInfo_buildNumber"
-            - buildUrl=$(curl -u $res_S_B_BuildInfo_0001_buildInfo_sourceArtifactory_user:$res_S_B_BuildInfo_0001_buildInfo_sourceArtifactory_apikey $buildInfoApiUrl | jq .buildInfo.url)
-            - echo $buildUrl
+            - buildUrl=$(curl -u $res_S_B_BuildInfo_0001_buildInfo_sourceArtifactory_user:$res_S_B_BuildInfo_0001_buildInfo_sourceArtifactory_apikey $buildInfoApiUrl | jq -r .buildInfo.url)
+            # Compare build url with previous step url
+            - if [ "$buildUrl" != "$buildStepUrl" ]; then return 1; fi
