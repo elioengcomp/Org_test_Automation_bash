@@ -3,10 +3,14 @@ resources:
     type: BuildInfo
     configuration:
       sourceArtifactory: s_artifactory
+      buildName: 'name'
+      buildNumber: '1'
   - name: S_B_BuildInfo_0002_buildInfo_output
     type: BuildInfo
     configuration:
       sourceArtifactory: s_artifactory
+      buildName: 'name'
+      buildNumber: '1'
 
 pipelines:
   - name: S_B_BuildInfo_0002
