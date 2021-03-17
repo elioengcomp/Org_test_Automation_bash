@@ -1,16 +1,8 @@
 resources:
-  - name: S_B_BuildInfo_0002_buildInfo_input
+  - name: S_B_BuildInfo_0002_buildInfo
     type: BuildInfo
     configuration:
       sourceArtifactory: s_artifactory
-      buildName: 'name'
-      buildNumber: '1'
-  - name: S_B_BuildInfo_0002_buildInfo_output
-    type: BuildInfo
-    configuration:
-      sourceArtifactory: s_artifactory
-      buildName: 'name'
-      buildNumber: '1'
 
 pipelines:
   - name: S_B_BuildInfo_0002
@@ -20,10 +12,9 @@ pipelines:
         configuration:
           integrations:
             - name: s_artifactory
-          outputResources:
-            - name: S_B_BuildInfo_0002_buildInfo_input
         execution:
           onExecute:
+            - printenv
             - echo "${run_id}" > S_B_BuildInfo_0002_fileSpec.txt
             - jfrog rt upload S_B_BuildInfo_0002_fileSpec.txt test-automation-generic-local
 
@@ -31,10 +22,7 @@ pipelines:
         type: PublishBuildInfo
         configuration:
           outputResources:
-            - name: S_B_BuildInfo_0002_buildInfo_output
-          inputResources:
-            - name: S_B_BuildInfo_0002_buildInfo_input
-              newVersionOnly: true
+            - name: S_B_BuildInfo_0002_buildInfo
           inputSteps:
             - name: S_B_BuildInfo_0002_1
         execution:
@@ -45,7 +33,7 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: S_B_BuildInfo_0002_buildInfo_output
+            - name: S_B_BuildInfo_0002_buildInfo
         execution:
           onExecute:
             - printenv
