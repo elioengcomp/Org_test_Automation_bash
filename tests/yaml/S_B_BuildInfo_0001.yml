@@ -18,7 +18,7 @@ pipelines:
             - name: S_B_BuildInfo_0001_buildInfo
         execution:
           onExecute:
-            - cat "Content-${run_number}" > artifact.txt
+            - echo "Content-${run_number}" > artifact.txt
             - jfrog rt upload artifact.txt ${targetRepo}/S_B_BuildInfo_0001-artifact-${run_number}.txt
             - jfrog rt build-publish
 
