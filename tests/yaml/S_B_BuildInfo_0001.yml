@@ -1,3 +1,9 @@
+resources:
+  - name: S_B_BuildInfo_0001_buildInfo
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: s_artifactory
+
 pipelines:
   - name: S_B_BuildInfo_0001
     steps:
@@ -5,11 +11,23 @@ pipelines:
         type: Bash
         configuration:
           environmentVariables:
-            targetRepo: example-repo-local
+            targetRepo: test-automation-generic-local
           integrations:
-            - name: my_artifactory
+            - name: s_artifactory
+          outputResources:
+            - name: S_B_BuildInfo_0001_buildInfo
         execution:
           onExecute:
             - cat "Content-${run_number}" > artifact.txt
-            - jfrog rt upload artifact.txt ${targetRepo}/artifact-${run_number}.txt
+            - jfrog rt upload artifact.txt ${targetRepo}/S_B_BuildInfo_0001-artifact-${run_number}.txt
             - jfrog rt build-publish
+
+      - name: S_B_BuildInfo_0001_2
+          type: Bash
+          configuration:
+            inputResources:
+              - name: S_B_BuildInfo_0001_buildInfo
+          execution:
+            onExecute:
+              - echo "$res_S_B_BuildInfo_0001_buildInfo_buildName"
+              - echo "$res_S_B_BuildInfo_0001_buildInfo_buildNumber"
