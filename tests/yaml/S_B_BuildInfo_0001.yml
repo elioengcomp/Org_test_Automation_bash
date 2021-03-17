@@ -30,4 +30,6 @@ pipelines:
             - name: S_B_BuildInfo_0001_buildInfo
         execution:
           onExecute:
-            - printenv
+            - buildInfoApiUrl="$res_S_B_BuildInfo_0001_buildInfo_sourceArtifactory_url/api/build/$res_S_B_BuildInfo_0001_buildInfo_buildName/$res_S_B_BuildInfo_0001_buildInfo_buildNumber"
+            - buildUrl=$(curl -u $res_S_B_BuildInfo_0001_buildInfo_sourceArtifactory_user:$res_S_B_BuildInfo_0001_buildInfo_sourceArtifactory_apikey $buildInfoApiUrl | jq .buildInfo.url)
+            - echo $buildUrl
