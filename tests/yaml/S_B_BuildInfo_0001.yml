@@ -1,0 +1,15 @@
+pipelines:
+  - name: S_B_BuildInfo_0001
+    steps:
+      - name: S_B_BuildInfo_0001_1
+        type: Bash
+        configuration:
+          environmentVariables:
+            targetRepo: example-repo-local
+          integrations:
+            - name: my_artifactory
+        execution:
+          onExecute:
+            - cat "Content-${run_number}" > artifact.txt
+            - jfrog rt upload artifact.txt ${targetRepo}/artifact-${run_number}.txt
+            - jfrog rt build-publish
