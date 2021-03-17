@@ -1,8 +1,12 @@
 resources:
-  - name: S_B_BuildInfo_0002_buildInfo
+  - name: S_B_BuildInfo_0002_buildInfo_input
     type: BuildInfo
     configuration:
       sourceArtifactory: s_artifactory
+  - name: S_B_BuildInfo_0002_buildInfo_output
+      type: BuildInfo
+      configuration:
+        sourceArtifactory: s_artifactory
 
 pipelines:
   - name: S_B_BuildInfo_0002
@@ -12,8 +16,6 @@ pipelines:
         configuration:
           integrations:
             - name: s_artifactory
-          inputResources:
-            - name: S_B_BuildInfo_0002_buildInfo
         execution:
           onExecute:
             - echo "${run_id}" > S_B_BuildInfo_0002_fileSpec.txt
@@ -23,7 +25,10 @@ pipelines:
         type: PublishBuildInfo
         configuration:
           outputResources:
-            - name: S_B_BuildInfo_0002_buildInfo
+            - name: S_B_BuildInfo_0002_buildInfo_output
+          inputResources:
+            - name: S_B_BuildInfo_0002_buildInfo_input
+              newVersionOnly: true
           inputSteps:
             - name: S_B_BuildInfo_0002_1
         execution:
@@ -34,7 +39,7 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: S_B_BuildInfo_0002_buildInfo
+            - name: S_B_BuildInfo_0002_buildInfo_output
         execution:
           onExecute:
             - printenv
