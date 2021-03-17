@@ -1,0 +1,48 @@
+resources:
+  - name: S_B_BuildInfo_0002_buildInfo
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: s_artifactory
+
+pipelines:
+  - name: S_B_BuildInfo_0002
+    steps:
+      - name: S_B_BuildInfo_0002_1
+        type: Bash
+        configuration:
+          integrations:
+            - name: s_artifactory
+        execution:
+          onExecute:
+            - echo "${run_id}" > S_B_BuildInfo_0002_fileSpec.txt
+            - jfrog rt upload S_B_BuildInfo_0002_fileSpec.txt test-automation-generic-local
+
+      - name: S_B_BuildInfo_0002_2
+        type: PublishBuildInfo
+        configuration:
+          outputResources:
+            - name: S_B_BuildInfo_0002_buildInfo
+          inputSteps:
+            - name: S_B_BuildInfo_0002_1
+        execution:
+          onComplete:
+            - add_run_variables buildStepUrl=$step_url
+
+      - name: S_B_BuildInfo_0002_3
+        type: Bash
+        configuration:
+          inputResources:
+            - name: S_B_BuildInfo_0002_buildInfo
+        execution:
+          onExecute:
+            - printenv
+            # Fetch build url from Artifactory
+            - buildInfoApiUrl="$res_S_B_BuildInfo_0002_buildInfo_sourceArtifactory_url/api/build/$res_S_B_BuildInfo_0002_buildInfo_buildName/$res_S_B_BuildInfo_0002_buildInfo_buildNumber"
+            - echo "BuildInfo API Url $buildInfoApiUrl"
+            - buildUrl=$(curl -u $res_S_B_BuildInfo_0002_buildInfo_sourceArtifactory_user:$res_S_B_BuildInfo_0002_buildInfo_sourceArtifactory_apikey $buildInfoApiUrl | jq -r .buildInfo.url)
+            - echo "Build Url $buildUrl"
+            - echo "Step Url $buildStepUrl"
+            # Compare build url with previous step url
+            - if [ "$buildUrl" != "$buildStepUrl" ]; then return 1; fi
+
+
