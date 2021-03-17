@@ -20,8 +20,8 @@ pipelines:
         configuration:
           integrations:
             - name: s_artifactory
-        outputResources:
-          - name: S_B_BuildInfo_0002_buildInfo_input
+          outputResources:
+            - name: S_B_BuildInfo_0002_buildInfo_input
         execution:
           onExecute:
             - echo "${run_id}" > S_B_BuildInfo_0002_fileSpec.txt
