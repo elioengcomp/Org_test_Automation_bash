@@ -3,6 +3,8 @@ resources:
     type: BuildInfo
     configuration:
       sourceArtifactory: s_artifactory
+      buildName: $pipeline_name
+      buildNumber: $run_number
 
 pipelines:
   - name: S_B_BuildInfo_0001
