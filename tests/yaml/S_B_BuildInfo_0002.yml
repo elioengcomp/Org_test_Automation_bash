@@ -16,6 +16,7 @@ pipelines:
           onExecute:
             - echo "${run_id}" > S_B_BuildInfo_0002_fileSpec.txt
             - jfrog rt upload S_B_BuildInfo_0002_fileSpec.txt test-automation-generic-local
+            - add_run_files /tmp/jfrog/. jfrog
 
       - name: S_B_BuildInfo_0002_2
         type: PublishBuildInfo
