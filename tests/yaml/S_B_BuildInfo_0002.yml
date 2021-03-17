@@ -4,9 +4,9 @@ resources:
     configuration:
       sourceArtifactory: s_artifactory
   - name: S_B_BuildInfo_0002_buildInfo_output
-      type: BuildInfo
-      configuration:
-        sourceArtifactory: s_artifactory
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: s_artifactory
 
 pipelines:
   - name: S_B_BuildInfo_0002
