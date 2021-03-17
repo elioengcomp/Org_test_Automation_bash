@@ -12,13 +12,12 @@ pipelines:
         configuration:
           integrations:
             - name: s_artifactory
+          inputResources:
+            - name: S_B_BuildInfo_0002_buildInfo
         execution:
           onExecute:
             - echo "${run_id}" > S_B_BuildInfo_0002_fileSpec.txt
             - jfrog rt upload S_B_BuildInfo_0002_fileSpec.txt test-automation-generic-local
-            - ls -la /tmp/jfrog/
-            - ls -la /tmp/jfrog/builds
-            - add_run_files /tmp/jfrog/ jfrog
 
       - name: S_B_BuildInfo_0002_2
         type: PublishBuildInfo
