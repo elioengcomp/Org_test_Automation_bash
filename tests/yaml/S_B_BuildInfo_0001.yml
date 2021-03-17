@@ -3,8 +3,8 @@ resources:
     type: BuildInfo
     configuration:
       sourceArtifactory: s_artifactory
-      buildName: $pipeline_name
-      buildNumber: $run_number
+      buildName: S_B_BuildInfo_0001
+      buildNumber: 1
 
 pipelines:
   - name: S_B_BuildInfo_0001
@@ -23,6 +23,7 @@ pipelines:
             - echo "Content-${run_number}" > artifact.txt
             - jfrog rt upload artifact.txt ${targetRepo}/S_B_BuildInfo_0001-artifact-${run_number}.txt
             - jfrog rt build-publish
+            - write_output S_B_BuildInfo_0001_buildInfo "buildNumber=$run_number"
 
       - name: S_B_BuildInfo_0001_2
         type: Bash
