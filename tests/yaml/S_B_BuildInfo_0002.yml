@@ -16,6 +16,8 @@ pipelines:
           onExecute:
             - printenv
             - add_run_variables buildStepName=${step_name}
+            - add_run_variables ${step_name}_buildNumber=$JFROG_CLI_BUILD_NUMBER
+            - add_run_variables ${step_name}_buildName=$JFROG_CLI_BUILD_NAME
             - echo "${run_id}" > S_B_BuildInfo_0002_fileSpec.txt
             - jfrog rt upload S_B_BuildInfo_0002_fileSpec.txt test-automation-generic-local
             - jfrog rt build-collect-env
