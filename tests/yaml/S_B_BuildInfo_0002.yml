@@ -6,6 +6,10 @@ resources:
 
 pipelines:
   - name: S_B_BuildInfo_0002
+    configuration:
+      environmentVariables:
+        readOnly:
+          targetRepo: test-automation-generic-local
     steps:
       - name: S_B_BuildInfo_0002_1
         type: Bash
@@ -14,13 +18,15 @@ pipelines:
             - name: s_artifactory
         execution:
           onExecute:
-            - printenv
+            # Collect build step info to mimic native build step
             - add_run_variables buildStepName=${step_name}
             - add_run_variables ${step_name}_buildNumber=$JFROG_CLI_BUILD_NUMBER
             - add_run_variables ${step_name}_buildName=$JFROG_CLI_BUILD_NAME
+            # Upload artifact
             - echo "${run_id}" > S_B_BuildInfo_0002_fileSpec.txt
-            - jfrog rt upload S_B_BuildInfo_0002_fileSpec.txt test-automation-generic-local
-            - jfrog rt build-collect-env
+            - $jfrog_cli_path rt upload S_B_BuildInfo_0002_fileSpec.txt $targetRepo
+            - $jfrog_cli_path rt build-collect-env
+            # Add cli state to run files so publish build info can restore it
             - add_run_files /tmp/jfrog/. jfrog
 
       - name: S_B_BuildInfo_0002_2
@@ -31,7 +37,8 @@ pipelines:
           inputSteps:
             - name: S_B_BuildInfo_0002_1
         execution:
-          onComplete:
+          onStart:
+            # Add step url to run to use for comparison on next step
             - add_run_variables buildStepUrl=$step_url
 
       - name: S_B_BuildInfo_0002_3
@@ -50,5 +57,6 @@ pipelines:
             - echo "Step Url $buildStepUrl"
             # Compare build url with previous step url
             - if [ "$buildUrl" != "$buildStepUrl" ]; then return 1; fi
+
 
 
