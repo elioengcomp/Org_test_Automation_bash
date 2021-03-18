@@ -26,7 +26,7 @@ pipelines:
             - echo "${run_id}" > S_B_BuildInfo_0002_fileSpec.txt
             - $jfrog_cli_path rt upload S_B_BuildInfo_0002_fileSpec.txt $targetRepo
             - $jfrog_cli_path rt build-collect-env
-            # Add cli state to run files so publish build info can restore it
+            # Add cli state to run files so publish build info step can restore it
             - add_run_files /tmp/jfrog/. jfrog
 
       - name: S_B_BuildInfo_0002_2
@@ -48,7 +48,6 @@ pipelines:
             - name: S_B_BuildInfo_0002_buildInfo
         execution:
           onExecute:
-            - printenv
             # Fetch build url from Artifactory
             - buildInfoApiUrl="$res_S_B_BuildInfo_0002_buildInfo_sourceArtifactory_url/api/build/$res_S_B_BuildInfo_0002_buildInfo_buildName/$res_S_B_BuildInfo_0002_buildInfo_buildNumber"
             - echo "BuildInfo API Url $buildInfoApiUrl"
