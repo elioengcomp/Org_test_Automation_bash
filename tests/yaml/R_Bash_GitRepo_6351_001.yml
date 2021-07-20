@@ -1,0 +1,26 @@
+template: true
+valuesFilePath: ../values/gitRepoValues.yml
+
+resources:
+  - name: R_Bash_GitRepo_6351_001_git_repo
+    type: GitRepo
+    configuration:
+      path: {{ .Values.GitHub.Org_test_Automation.path }}
+      branches:
+        include: master
+      gitProvider: s_gitHub
+      cloneProtocol: https
+
+pipelines:
+  - name: R_Bash_GitRepo_6351_001
+    steps:
+      - name: R_Bash_GitRepo_6351_001_1
+        type: Bash
+        configuration:
+          inputResources:
+            - name: R_Bash_GitRepo_6351_001_git_repo
+        execution:
+          onExecute:
+            - pushd ${res_R_Bash_GitRepo_6351_001_git_repo_resourcePath}
+            - ls -la
+            - popd
