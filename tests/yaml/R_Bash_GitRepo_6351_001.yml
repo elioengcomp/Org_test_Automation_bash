@@ -5,7 +5,7 @@ resources:
   - name: R_Bash_GitRepo_6351_001_git_repo
     type: GitRepo
     configuration:
-      path: {{ .Values.GitHub.Org_test_Automation.path }}
+      path: {{ .Values.GitHub.Org_test_Automation_bash.path }}
       branches:
         include: master
       gitProvider: s_gitHub
