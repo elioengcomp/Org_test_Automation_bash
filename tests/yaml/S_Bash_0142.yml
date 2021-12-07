@@ -69,8 +69,8 @@ pipelines:
             - |
               [ ! -z "$res_S_Bash_0142_GitRepo_isRelease" ]
 
-            - |
-              [ ! -z "$res_S_Bash_0142_GitRepo_committerLogin" ]
+            # - |
+            #   [ ! -z "$res_S_Bash_0142_GitRepo_committerLogin" ]
             - |
               [ ! -z "$res_S_Bash_0142_GitRepo_integrationAlias" ]
             - |
@@ -86,8 +86,8 @@ pipelines:
               [ ! -z "$res_S_Bash_0142_GitRepo_sysPrivateDeployKey" ]
             - |
               [ ! -z "$res_S_Bash_0142_GitRepo_sysPublicDeployKey" ]
-            - |
-              [ ! -z "$res_S_Bash_0142_GitRepo_lastAuthorLogin" ]
+            # - |
+            #   [ ! -z "$res_S_Bash_0142_GitRepo_lastAuthorLogin" ]
             - |
               [ ! -z "$res_S_Bash_0142_GitRepo_beforeCommitSha" ]
             - |

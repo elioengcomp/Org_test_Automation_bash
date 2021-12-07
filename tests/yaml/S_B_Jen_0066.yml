@@ -1,0 +1,12 @@
+pipelines:
+  - name: S_B_Jen_0066
+    steps:
+      - name: S_B_Jen_0066
+        type: Jenkins
+        configuration:
+          jenkinsJobName: testFolder/multibranch
+          jenkinsBranchName: {{gitBranch}}
+          buildParameters:
+            myPipelinesStepURL: ${step_url}
+          integrations:
+            - name: S_B_Jenkins

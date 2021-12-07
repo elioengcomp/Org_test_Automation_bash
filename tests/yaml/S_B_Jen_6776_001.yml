@@ -1,0 +1,19 @@
+resources:
+  - name: S_B_Jen_6776_001_resource
+    type: PropertyBag
+    configuration:
+      jobName: testFolder/multibranch
+      branchName: {{gitBranch}}
+
+pipelines:
+  - name: S_B_Jen_6776_001
+    steps:
+      - name: S_B_Jen_6776_001
+        type: Jenkins
+        configuration:
+          inputResources:
+            - name: S_B_Jen_6776_001_resource
+          jenkinsJobName: "${res_S_B_Jen_6776_001_resource_jobName}"
+          jenkinsBranchName: "${res_S_B_Jen_6776_001_resource_branchName}"
+          integrations:
+            - name: S_B_Jenkins

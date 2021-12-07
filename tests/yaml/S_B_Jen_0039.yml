@@ -1,0 +1,9 @@
+pipelines:
+  - name: S_B_Jen_0039
+    steps:
+      - name: S_B_Jen_0039
+        type: Jenkins
+        configuration:
+          jenkinsJobName: testFolder/singlebranch
+          integrations:
+            - name: S_B_Jenkins

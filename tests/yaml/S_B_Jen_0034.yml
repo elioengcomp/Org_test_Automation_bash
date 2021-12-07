@@ -4,23 +4,22 @@ pipelines:
       - name: S_B_Jen_0034_1
         type: Jenkins
         configuration:
-          jenkinsJobName: testPipeline  
+          jenkinsJobName: testPipeline
           integrations:
-            - name: jenkins
+            - name: S_B_Jenkins
       - name: S_B_Jen_0034_2
         type: Jenkins
         configuration:
           inputSteps:
             - name: S_B_Jen_0034_1
-          jenkinsJobName: testPipeline  
+          jenkinsJobName: testPipeline
           integrations:
-            - name: jenkins
+            - name: S_B_Jenkins
       - name: S_B_Jen_0034_3
         type: Jenkins
         configuration:
           inputSteps:
             - name: S_B_Jen_0034_1
-          jenkinsJobName: testPipeline  
+          jenkinsJobName: testPipeline
           integrations:
-            - name: jenkins
-      
+            - name: S_B_Jenkins

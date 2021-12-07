@@ -4,6 +4,6 @@ pipelines:
       - name: S_B_Jen_0046_1
         type: Jenkins
         configuration:
-          jenkinsJobName: var_freestyle_proj
+          jenkinsJobName: testPipeline
           integrations:
-            - name: jenkins
+            - name: S_B_Jenkins

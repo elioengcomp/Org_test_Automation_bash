@@ -1,0 +1,11 @@
+pipelines:
+  - name: S_B_Jen_6776_010
+    steps:
+      - name: S_B_Jen_6776_010
+        type: Jenkins
+        configuration:
+          jenkinsJobName: testFolder/singlebranch
+          buildParameters:
+            waitTime: 120
+          integrations:
+            - name: S_B_Jenkins

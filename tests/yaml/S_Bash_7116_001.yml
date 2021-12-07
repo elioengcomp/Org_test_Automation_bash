@@ -1,0 +1,17 @@
+pipelines:
+  - name: S_Bash_7116_001
+    steps:
+      - name: S_Bash_7116_001
+        type: Bash
+        configuration:
+          integrations:
+            - name: BSG_DockerRegistry
+          runtime:
+            type: image
+            image:
+              custom:
+                name: python
+                tag: 3.7.12-bullseye
+        execution:
+          onExecute:
+            - echo "executing step..."

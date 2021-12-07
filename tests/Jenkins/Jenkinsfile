@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+
+    parameters {
+      string(name: 'waitTime', defaultValue: '0', description: 'Slow down the job')
+      string(name: 'myPipelinesProjectName', defaultValue: '', description: 'project_name')
+      string(name: 'myPipelinesProjectKey', defaultValue: '', description: 'project_key')
+      string(name: 'myPipelinesProjectId', defaultValue: '', description: 'project_id')
+      string(name: 'myPipelinesStepURL', defaultValue: '', description: 'step_url')
+    }
+
+    stages {
+        stage('Hello') {
+            steps {
+                sleep "${params.waitTime}"
+                echo 'Hello World'
+            }
+        }
+    }
+}

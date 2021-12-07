@@ -1,0 +1,24 @@
+template: true
+valuesFilePath: ../values/gitRepoValues.yml
+
+resources:
+  - name: S_Bash_6862_0003_GitRepo
+    type: GitRepo
+    configuration:
+      gitProvider: s_gitHub
+      path: {{ .Values.GitHub.Org_test_Automation_bash.path }}
+      branches:
+        include: {{gitBranch}}
+
+pipelines:
+  - name: S_Bash_6862_0003
+    steps:
+      - name: S_Bash_6862_0003_1
+        type: GoBuild
+        configuration:
+          inputResources:
+            - name: S_Bash_6862_0003_GitRepo
+          integrations:
+            - name: s_artifactory
+          sourceLocation: "tests/Go/HelloWorld"
+          resolverRepo: test-automation-go-virtual

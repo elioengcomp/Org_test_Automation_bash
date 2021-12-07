@@ -5,6 +5,9 @@ pipelines:
         type: Jenkins
         configuration:
           timeoutSeconds: 2
-          jenkinsJobName: testPipeline
+          jenkinsJobName: testFolder/multibranch
+          jenkinsBranchName: {{gitBranch}}
+          buildParameters:
+            waitTime: 120
           integrations:
-            - name: jenkins
+            - name: S_B_Jenkins

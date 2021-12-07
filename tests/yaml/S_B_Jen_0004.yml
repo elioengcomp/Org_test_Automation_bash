@@ -1,0 +1,26 @@
+pipelines:
+  - name: S_B_Jen_0004
+    steps:
+      - name: S_B_Jen_0004_1
+        type: Bash
+        execution:
+          onStart:
+            - echo "executing step.."
+      - name: S_B_Jen_0004_2
+        type: Jenkins
+        configuration:
+          jenkinsJobName: testPipeline
+          priority: 9990
+          inputSteps:
+            - name: S_B_Jen_0004_1
+          integrations:
+            - name: S_B_Jenkins
+      - name: S_B_Jen_0004_3
+        type: Jenkins
+        configuration:
+          jenkinsJobName: testPipeline
+          priority: 9991
+          inputSteps:
+            - name: S_B_Jen_0004_1
+          integrations:
+            - name: S_B_Jenkins

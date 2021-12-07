@@ -1,0 +1,17 @@
+pipelines:
+  - name: pipeline_S_Bash_ApprovalGates_7196_0001
+    steps:
+      - name: S_Bash_ApprovalGates_7196_0001_1
+        type: Bash
+        execution:
+          onExecute:
+            - sleep 30
+      - name: S_Bash_ApprovalGates_7196_0001_2
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: S_Bash_ApprovalGates_7196_0001_1
+          requiresApproval: true
+        execution:
+          onExecute:
+            - echo "Hello World"

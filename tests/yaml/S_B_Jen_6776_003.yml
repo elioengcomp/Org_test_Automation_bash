@@ -1,0 +1,13 @@
+pipelines:
+  - name: S_B_Jen_6776_003
+    configuration:
+      environmentVariables:
+        readOnly:
+          jobName: failPipeline
+    steps:
+      - name: S_B_Jen_6776_003
+        type: Jenkins
+        configuration:
+          jenkinsJobName: "${jobName}"
+          integrations:
+            - name: S_B_Jenkins

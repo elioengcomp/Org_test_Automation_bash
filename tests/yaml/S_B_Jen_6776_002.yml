@@ -1,0 +1,11 @@
+pipelines:
+  - name: S_B_Jen_6776_002
+    steps:
+      - name: S_B_Jen_6776_002
+        type: Jenkins
+        configuration:
+          jenkinsJobName: "${int_S_B_Jen_6776_002_generic_jobName}"
+          jenkinsBranchName: "${int_S_B_Jen_6776_002_generic_branchName}"
+          integrations:
+            - name: S_B_Jenkins
+            - name: S_B_Jen_6776_002_generic
