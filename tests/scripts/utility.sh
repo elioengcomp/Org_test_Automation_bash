@@ -1,3 +1,4 @@
 #!/bin/bash
 
-execute_command echo "Utility function executed!"
+uuid=$(get_uuid)
+echo "uuid: $uuid"
