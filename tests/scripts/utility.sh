@@ -20,7 +20,7 @@ utility_functions=( "get_integration_name" "get_uuid"  "get_resource_name"
 "export_run_variables" "export_pipeline_variables" "add_run_files"
 "restore_run_files" "get_run_state_location" "add_pipeline_files"
 "restore_pipeline_files" "configure_jfrog_cli" "use_jfrog_cli"
-"cleanup_jfrog_cli" "set_payload" "start_group" "stop_group"  "execute_command"
+"cleanup_jfrog_cli" "set_payload" "start_group" "stop_group" "execute_command"
 "on_error" )
 
 for func_name in "${utility_functions[@]}"
