@@ -21,6 +21,6 @@ pipelines:
         execution:
           onExecute:
             - pushd $res_S_Bash_Util_7133_0002_GitRepo_resourcePath
-            - ./scripts/utility.sh
+            - ./tests/scripts/utility.sh
             - popd
 
