@@ -20,7 +20,7 @@ pipelines:
             - name: S_Bash_Util_7133_0002_GitRepo
         execution:
           onExecute:
-            - pushd ${res_S_Bash_Util_7133_0001_GitRepo_resourcePath}/tests/scripts
+            - pushd ${res_S_Bash_Util_7133_0002_GitRepo_resourcePath}/tests/scripts
             - ./utility.sh
             - popd
 
