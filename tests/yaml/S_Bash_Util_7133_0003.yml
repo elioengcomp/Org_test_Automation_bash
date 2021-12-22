@@ -2,7 +2,7 @@ template: true
 valuesFilePath: ../values/gitRepoValues.yml
 
 resources:
-  - name: S_Bash_Util_7133_0001_GitRepo
+  - name: S_Bash_Util_7133_0003_GitRepo
     type: GitRepo
     configuration:
       gitProvider: s_gitHub
@@ -11,16 +11,18 @@ resources:
         include: {{gitBranch}}
 
 pipelines:
-  - name: S_Bash_Util_7133_0001
+  - name: S_Bash_Util_7133_0003
     steps:
-      - name: S_Bash_Util_7133_0001_1
+      - name: S_Bash_Util_7133_0003_1
         type: Bash
         configuration:
+          runtime:
+            type: host
           inputResources:
-            - name: S_Bash_Util_7133_0001_GitRepo
+            - name: S_Bash_Util_7133_0003_GitRepo
         execution:
           onExecute:
-            - pushd ${res_S_Bash_Util_7133_0001_GitRepo_resourcePath}/tests/scripts
-            - source ./utility.sh
+            - pushd ${res_S_Bash_Util_7133_0003_GitRepo_resourcePath}/tests/scripts
+            - ./utility.sh
             - popd
 
