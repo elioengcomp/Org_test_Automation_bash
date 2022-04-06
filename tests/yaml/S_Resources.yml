@@ -1,0 +1,107 @@
+resources:
+  - name: propertyBag_1
+    type: PropertyBag
+    configuration:
+      value: 0
+
+  - name: propertyBag_2
+    type: PropertyBag
+    configuration:
+      value: 0
+
+  - name: propertyBag_3
+    type: PropertyBag
+    configuration:
+      value: 0
+
+  - name: propertyBag_4
+    type: PropertyBag
+    configuration:
+      value: 0
+
+  - name: propertyBag_5
+    type: PropertyBag
+    configuration:
+      value: 0
+
+  - name: propertyBag_6
+    type: PropertyBag
+    configuration:
+      value: 0
+
+  - name: propertyBag_7
+    type: PropertyBag
+    configuration:
+      value: 0
+
+  - name: propertyBag_8
+    type: PropertyBag
+    configuration:
+      value: 0
+
+  - name: propertyBag_9
+    type: PropertyBag
+    configuration:
+      value: 0
+
+  - name: propertyBag_10
+    type: PropertyBag
+    configuration:
+      value: 0
+
+pipelines:
+  - name: multiple_resources_test
+    steps:
+      - name: producer
+        type: Bash
+        configuration:
+          outputResources:
+            - name: propertyBag_1
+            - name: propertyBag_2
+            - name: propertyBag_3
+            - name: propertyBag_4
+            - name: propertyBag_5
+            - name: propertyBag_6
+            - name: propertyBag_7
+            - name: propertyBag_8
+            - name: propertyBag_9
+            - name: propertyBag_10
+        execution:
+          onExecute:
+            - echo $run_id
+            - write_output propertyBag_1 "value=$run_id"
+            - write_output propertyBag_2 "value=$run_id"
+            - write_output propertyBag_3 "value=$run_id"
+            - write_output propertyBag_4 "value=$run_id"
+            - write_output propertyBag_5 "value=$run_id"
+            - write_output propertyBag_6 "value=$run_id"
+            - write_output propertyBag_7 "value=$run_id"
+            - write_output propertyBag_8 "value=$run_id"
+            - write_output propertyBag_9 "value=$run_id"
+            - write_output propertyBag_10 "value=$run_id"
+      - name: consumer
+        type: Bash
+        configuration:
+          inputResources:
+            - name: propertyBag_1
+            - name: propertyBag_2
+            - name: propertyBag_3
+            - name: propertyBag_4
+            - name: propertyBag_5
+            - name: propertyBag_6
+            - name: propertyBag_7
+            - name: propertyBag_8
+            - name: propertyBag_9
+            - name: propertyBag_10
+        execution:
+          onExecute:
+            - echo $res_propertyBag_1_value
+            - echo $res_propertyBag_2_value
+            - echo $res_propertyBag_3_value
+            - echo $res_propertyBag_4_value
+            - echo $res_propertyBag_5_value
+            - echo $res_propertyBag_6_value
+            - echo $res_propertyBag_7_value
+            - echo $res_propertyBag_8_value
+            - echo $res_propertyBag_9_value
+            - echo $res_propertyBag_10_value
