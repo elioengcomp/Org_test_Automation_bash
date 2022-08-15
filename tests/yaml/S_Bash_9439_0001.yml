@@ -1,0 +1,10 @@
+pipelines:
+  - name: S_Bash_9439_0001
+    steps:
+      - name: S_Bash_9439_0001_step
+        type: Bash
+        execution:
+          onExecute:
+            - curl -H "Authorization:Bearer $builder_api_token" -H "Content-type:application/json" $pipelines_api_url/steps/$step_id -o step.json
+            - systemPropertyBag=$(cat step.json | jq ".systemPropertyBag")
+            - if [[ "$systemPropertyBag" != "{}" ]]; then exit 1; fi
